@@ -3,17 +3,31 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
+import Image from 'next/image'
 import { type Locale, contentData } from '@/lib/i18n'
 
 interface ProjectsSectionProps {
   locale: Locale
 }
 
+// 프로젝트 데이터 타입 정의
+interface Project {
+  id: number
+  title: string
+  description: string
+  category: string
+  type: string
+  tags: string[]
+  demoUrl: string
+  githubUrl: string | null
+  image: string
+}
+
 const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [filter, setFilter] = useState('All')
-  const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
 
   const projects = contentData[locale].projects.items
@@ -108,15 +122,12 @@ const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
               {/* 배경 이미지 영역 */}
               {project.image ? (
                 <div className="absolute inset-0">
-                  <img 
+                  <Image 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // 이미지 로드 실패 시 기본 그라디언트로 대체
-                      e.currentTarget.style.display = 'none'
-                      e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>'
-                    }}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-black/30" />
                 </div>

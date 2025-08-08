@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { type Locale, contentData } from '@/lib/i18n'
 
 interface SkillsSectionProps {
@@ -106,17 +107,12 @@ const SkillsSection = ({ locale }: SkillsSectionProps) => {
                     >
                       {skillLogo ? (
                         <div className="mb-3 flex justify-center">
-                          <img 
+                          <Image 
                             src={skillLogo} 
                             alt={skillName}
-                            className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300"
-                            onError={(e) => {
-                              console.error('이미지 로드 실패:', skillLogo)
-                              e.currentTarget.style.display = 'none'
-                            }}
-                            onLoad={() => {
-                              console.log('이미지 로드 성공:', skillLogo)
-                            }}
+                            width={40}
+                            height={40}
+                            className="object-contain group-hover:scale-110 transition-transform duration-300"
                           />
                         </div>
                       ) : (
@@ -163,17 +159,12 @@ const SkillsSection = ({ locale }: SkillsSectionProps) => {
                     >
                       {toolLogo ? (
                         <div className="mb-3 flex justify-center">
-                          <img 
+                          <Image 
                             src={toolLogo} 
                             alt={toolName}
-                            className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300"
-                            onError={(e) => {
-                              console.error('이미지 로드 실패:', toolLogo)
-                              e.currentTarget.style.display = 'none'
-                            }}
-                            onLoad={() => {
-                              console.log('이미지 로드 성공:', toolLogo)
-                            }}
+                            width={40}
+                            height={40}
+                            className="object-contain group-hover:scale-110 transition-transform duration-300"
                           />
                         </div>
                       ) : (

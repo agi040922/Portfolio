@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Mail, Linkedin } from 'lucide-react'
+import { Github } from 'lucide-react'
 import { type Locale, contentData } from '@/lib/i18n'
 
 interface FooterProps {

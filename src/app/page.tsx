@@ -1,6 +1,23 @@
-import { redirect } from 'next/navigation'
+import Header from '@/components/Header'
+import HeroImpactAnimation from '@/components/HeroImpactAnimation'
+import AboutSection from '@/components/AboutSection'
+import SkillsSection from '@/components/SkillsSection'
+import CareerSection from '@/components/CareerSection'
+import ProjectsSection from '@/components/ProjectsSection'
+import Footer from '@/components/Footer'
 
-export default function RootPage() {
-  // 미들웨어가 처리하지 못한 경우를 위한 백업
-  redirect('/ko')
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <main>
+        <HeroImpactAnimation />
+        <AboutSection />
+        <SkillsSection />
+        <CareerSection />
+        <ProjectsSection />
+      </main>
+      <Footer />
+    </div>
+  )
 }

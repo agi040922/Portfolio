@@ -1,14 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github } from 'lucide-react'
-import { type Locale, contentData } from '@/lib/i18n'
+import { Github, Mail, ExternalLink } from 'lucide-react'
 
 interface FooterProps {
-  locale: Locale
 }
 
-const Footer = ({ locale }: FooterProps) => {
+const Footer = () => {
   return (
     <footer className="bg-black text-white py-16">
       <div className="section-padding container-max">
@@ -21,17 +19,17 @@ const Footer = ({ locale }: FooterProps) => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <p className="text-lg text-gray-300 mb-2">
-              {contentData[locale].footer.message}
-            </p>
-            <p className="text-gray-400">
-              {contentData[locale].footer.contact}
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Thank You
+            </h2>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              함께해 주셔서 감사합니다
             </p>
             <div className="text-6xl md:text-8xl font-bold mb-8">
               Thank You
             </div>
             <p className="text-gray-300 max-w-3xl mx-auto leading-relaxed text-lg">
-              {contentData[locale].footer.description}
+              
             </p>
           </motion.div>
 

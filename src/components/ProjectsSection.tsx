@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { ExternalLink, Github } from 'lucide-react'
+import ProjectDetail from './ProjectDetail'
 import Image from 'next/image'
-import { type Locale, contentData } from '@/lib/i18n'
 
 interface ProjectsSectionProps {
-  locale: Locale
 }
 
 // 프로젝트 데이터 타입 정의
@@ -18,19 +18,105 @@ interface Project {
   category: string
   type: string
   tags: string[]
-  demoUrl: string
-  githubUrl: string | null
-  image: string
+  image?: string
+  demoUrl?: string
+  githubUrl?: string | null
+  status: string
 }
 
-const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
+const ProjectsSection = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [filter, setFilter] = useState('All')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
 
-  const projects = contentData[locale].projects.items
+  const projects: Project[] = [
+    {
+      id: 1,
+      title: "FAIR 인사노무컨설팅 웹사이트 재구축 및 AI 기반 콘텐츠 관리 시스템",
+      description: "오래된 기존 웹사이트를 전면 재구축하며 기업의 전문성을 강조하는 홈페이지를 제작했습니다. Rich Text Editor와 AI 기반 SEO 메타데이터 자동 생성 시스템을 개발하여 운영 효율성과 온라인 가시성을 크게 향상시켰습니다.",
+      category: "Team",
+      type: "웹사이트",
+      tags: ["Next.js", "TypeScript", "AI", "SEO", "Rich Text Editor"],
+      image: "/images/project1.jpg",
+      demoUrl: "https://fair-consulting.co.kr",
+      githubUrl: null,
+      status: "완료"
+    },
+    {
+      id: 2,
+      title: "PrayNie.com - AI 추천 기능 스마트 기도 관리 시스템",
+      description: "선교회의 제안으로 시작된 기도 관리 시스템으로, AI를 접목하여 사용자 맞춤형 기도 제목 추천과 관련 성구 연결 기능을 제공합니다. SNS형 소통 기능과 개인 기도 관리 기능을 통합한 종합 플랫폼입니다.",
+      category: "Team",
+      type: "웹앱",
+      tags: ["React", "AI", "Firebase", "SNS"],
+      image: "/images/project2.jpg",
+      demoUrl: "https://prayni.com",
+      githubUrl: "https://github.com/example/prayni",
+      status: "완료"
+    },
+    {
+      id: 3,
+      title: "DebateTimer.org - 차세대 토론 플랫폼",
+      description: "한국대학생토론연합회와 협력하여 전국 대학 토론 동아리를 위한 통합 타이머 시스템을 개발했습니다. 다양한 대학별 토론 방식을 하나의 시스템에서 맞춤형으로 관리하며, 다중 기기 화면 송출 기능을 제공합니다.",
+      category: "Team",
+      type: "웹앱",
+      tags: ["Vue.js", "WebSocket", "Node.js", "Multi-device"],
+      image: "/images/project3.jpg",
+      demoUrl: "https://debatetimer.org",
+      githubUrl: "https://github.com/example/debate-timer",
+      status: "완료"
+    },
+    {
+      id: 4,
+      title: "QR 인증 시스템 & PG 연동 티켓 구매 플랫폼",
+      description: "A회사의 티켓 구매 시스템에 QR 인증 기능과 결제 시스템(PG)을 연동하는 통합 솔루션을 개발했습니다. 구매부터 현장 인증까지 전 과정을 자동화하여 운영 효율성과 사용자 편의성을 동시에 향상시켰습니다.",
+      category: "Team",
+      type: "결제 시스템",
+      tags: ["PG연동", "QR코드", "React", "Node.js", "Admin Panel"],
+      image: "/images/project4.jpg",
+      demoUrl: "#",
+      githubUrl: null,
+      status: "완료"
+    },
+    {
+      id: 5,
+      title: "B회사 웹사이트 UI/UX 디자인 및 프론트엔드 개발",
+      description: "B회사의 새로운 웹사이트 구축 프로젝트에서 UI/UX 디자인과 프론트엔드 개발을 담당했습니다. Figma를 활용해 15페이지 분량의 웹사이트 디자인 시안을 제작하고, 반응형 웹 디자인으로 구현했습니다.",
+      category: "Single",
+      type: "웹사이트",
+      tags: ["Figma", "UI/UX", "HTML", "CSS", "JavaScript", "반응형"],
+      image: "/images/project5.jpg",
+      demoUrl: "#",
+      githubUrl: null,
+      status: "완료"
+    },
+    {
+      id: 6,
+      title: "RAG 기반 명지대학교 입시 Q&A 챗봇",
+      description: "교내 경진대회 수상작으로, 현재 모교 입학처 홈페이지에서 실사용 중인 입시 안내 챗봇입니다. RAG 기술을 활용하여 입시 요강을 학습시키고, 할루시네이션 최소화를 위한 다양한 최적화 기법을 적용했습니다.",
+      category: "Single",
+      type: "AI 챗봇",
+      tags: ["RAG", "AI", "Python", "LangChain", "NLP"],
+      image: "/images/project6.jpg",
+      demoUrl: "https://myongji.ac.kr",
+      githubUrl: null,
+      status: "완료"
+    },
+    {
+      id: 7,
+      title: "대학교 스터디룸 관리 시스템",
+      description: "학생지원팀과 협력하여 개발 중인 '대학교 스터디룸 관리 시스템'입니다. 관리자의 스터디룸 관리 업무를 간소화하고 학생들의 예약 및 이용 과정을 크게 단순화하는 것이 목표입니다. Flutter를 활용한 크로스플랫폼 모바일 앱으로 개발하고 있습니다.",
+      category: "Team",
+      type: "모바일 앱",
+      tags: ["Flutter", "Cross-platform", "ERD", "API", "Mobile"],
+      image: "/images/project7.jpg",
+      demoUrl: "#",
+      githubUrl: null,
+      status: "개발 중"
+    }
+  ]
 
   const filters = ['All', 'Team', 'Single']
 
@@ -63,17 +149,12 @@ const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-black">
-            {contentData[locale].projects.title}
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+            프로젝트
           </h2>
-          <motion.p 
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {contentData[locale].projects.subtitle}
-          </motion.p>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            다양한 프로젝트 경험
+          </p>
         </motion.div>
 
         {/* 필터 버튼 */}
@@ -147,6 +228,18 @@ const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
                       {project.type}
                     </span>
                   </div>
+                  {/* 개발 상태 배지 */}
+                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                    project.status === '완료' 
+                      ? 'bg-green-500/90 text-white' 
+                      : project.status === '개발 중'
+                      ? 'bg-blue-500/90 text-white'
+                      : project.status === '기획 중'
+                      ? 'bg-yellow-500/90 text-white'
+                      : 'bg-gray-500/90 text-white'
+                  }`}>
+                    {project.status}
+                  </span>
                 </div>
                 
                 {/* 하단 컨텐츠 */}
@@ -183,7 +276,7 @@ const ProjectsSection = ({ locale }: ProjectsSectionProps) => {
                   transition={{ duration: 0.2 }}
                   className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-100 transition-colors flex items-center gap-2 transform group-hover:scale-100 scale-95"
                 >
-                  <span>{contentData[locale].projects.viewDetails}</span>
+                  <span>자세히 보기</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

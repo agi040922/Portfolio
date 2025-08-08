@@ -2,13 +2,8 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { type Locale, contentData } from '@/lib/i18n'
 
-interface HeroImpactAnimationProps {
-  locale: Locale
-}
-
-const HeroImpactAnimation = ({ locale }: HeroImpactAnimationProps) => {
+const HeroImpactAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -101,9 +96,40 @@ const HeroImpactAnimation = ({ locale }: HeroImpactAnimationProps) => {
             className="h-1 bg-black mx-auto mb-8"
             style={{ maxWidth: '200px' }}
           />
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
-            {contentData[locale].hero.name}
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-6">
+            DEVHOON 풀스택 개발 팀
           </p>
+          
+          {/* GitHub & Velog 링크 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="flex gap-8 text-lg"
+          >
+            <a
+              href="https://github.com/agi040922"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-black transition-colors relative group"
+            >
+              <span className="relative">
+                GitHub
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              </span>
+            </a>
+            <a
+              href="https://velog.io/@devhoon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-black transition-colors relative group"
+            >
+              <span className="relative">
+                Velog
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              </span>
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* 스크롤 인디케이터 */}
@@ -118,7 +144,7 @@ const HeroImpactAnimation = ({ locale }: HeroImpactAnimationProps) => {
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center text-gray-400"
           >
-            <span className="text-sm mb-2">{locale === 'ko' ? '스크롤 다운' : 'Scroll Down'}</span>
+            <span className="text-sm mb-2">스크롤 다운</span>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>

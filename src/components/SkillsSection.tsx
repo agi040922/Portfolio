@@ -4,33 +4,57 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import Image from 'next/image'
-import { type Locale, contentData } from '@/lib/i18n'
 
-interface SkillsSectionProps {
-  locale: Locale
-}
 
-const SkillsSection = ({ locale }: SkillsSectionProps) => {
+const SkillsSection = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const frontendSkills = contentData[locale].skills.frontend.skills as Array<{ name: string; logo: string } | string>
-  const tools = contentData[locale].skills.tools.items as Array<{ name: string; logo: string } | string>
-  const skillsDescription = contentData[locale].skills.description
+  const frontendSkills = [
+    { name: 'Next.js', icon: 'nextdotjs.svg' },
+    { name: 'TypeScript', icon: 'typescript.svg' },
+    { name: 'React', icon: 'react.svg' },
+    { name: 'JavaScript', icon: 'javascript.svg' },
+    { name: 'Tailwind CSS', icon: 'tailwindcss.svg' },
+    { name: 'HTML5', icon: 'html5.svg' },
+    { name: 'CSS3', icon: 'css3.svg' }
+  ]
+  const backendSkills = [
+    { name: 'Node.js', icon: 'nodedotjs.svg' },
+    { name: 'Python', icon: 'python.svg' },
+    { name: 'Django', icon: 'django.svg' },
+    { name: 'Supabase', icon: 'supabase.svg' },
+    { name: 'PostgreSQL', icon: 'postgresql.svg' }
+  ]
+  const tools = [
+    { name: 'Git', icon: 'git.svg' },
+    { name: 'GitHub', icon: 'github.svg' },
+    { name: 'AWS', icon: 'aws.svg' },
+    { name: 'Vercel', icon: 'vercel.svg' },
+    { name: 'Figma', icon: 'figma.svg' },
+    { name: 'Postman', icon: 'postman.svg' }
+  ]
+  const skillsDescription = '다양한 프론트엔드 기술과 도구들을 활용하여 사용자 중심의 웹 애플리케이션을 개발합니다.'
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.3
+      }
+    }
   }
 
   return (
@@ -44,156 +68,127 @@ const SkillsSection = ({ locale }: SkillsSectionProps) => {
         >
           {/* 섹션 타이틀 */}
           <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl font-bold mb-4"
-            >
-              {contentData[locale].skills.title}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-600 text-lg mb-4"
-            >
-              {contentData[locale].skills.subtitle}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-gray-700 max-w-3xl mx-auto mb-8 leading-relaxed"
-            >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+              기술 스택
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {skillsDescription}
-            </motion.p>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="h-1 bg-black mx-auto"
-            />
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Frontend Skills */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <h3 className="text-2xl font-bold mb-8 text-center">{contentData[locale].skills.frontend.title}</h3>
+          {/* 한 줄 배치 스킬 섹션 */}
+          <div className="space-y-12">
+            {/* Frontend */}
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-xl font-bold text-black mb-6 text-center"
+              >
+                Frontend
+              </motion.h3>
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                className="flex flex-wrap gap-4 justify-center"
               >
-                {frontendSkills.map((skill, index) => {
-                  const skillName = typeof skill === 'string' ? skill : skill.name
-                  const skillLogo = typeof skill === 'string' ? null : skill.logo
-                  
-                  // 디버깅: 콘솔에 스킬 정보 출력
-                  console.log('Frontend Skill:', { skill, skillName, skillLogo, type: typeof skill })
-                  
-                  return (
-                    <motion.div
-                      key={skillName}
-                      variants={itemVariants}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05, y: -5 }}
-                      className="bg-white border border-gray-200 p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300 cursor-default group"
-                    >
-                      {skillLogo ? (
-                        <div className="mb-3 flex justify-center">
-                          <Image 
-                            src={skillLogo} 
-                            alt={skillName}
-                            width={40}
-                            height={40}
-                            className="object-contain group-hover:scale-110 transition-transform duration-300"
-                          />
-                        </div>
-                      ) : (
-                        <div className="mb-3 flex justify-center">
-                          <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-xs font-bold text-gray-600">
-                            {skillName.charAt(0)}
-                          </div>
-                        </div>
-                      )}
-                      <span className="text-gray-800 font-semibold text-sm">{skillName}</span>
-                    </motion.div>
-                  )
-                })}
+                {frontendSkills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    variants={itemVariants}
+                    transition={{ delay: index * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300"
+                  >
+                    <Image
+                      src={`/images/skills/${skill.icon}`}
+                      alt={skill.name}
+                      width={20}
+                      height={20}
+                      className="w-5 h-5"
+                    />
+                    <span className="text-sm font-medium text-gray-700">{skill.name}</span>
+                  </motion.div>
+                ))}
               </motion.div>
-            </motion.div>
+            </div>
+
+            {/* Backend */}
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-xl font-bold text-black mb-6 text-center"
+              >
+                Backend
+              </motion.h3>
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className="flex flex-wrap gap-4 justify-center"
+              >
+                {backendSkills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    variants={itemVariants}
+                    transition={{ delay: index * 0.05 + 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300"
+                  >
+                    <Image
+                      src={`/images/skills/${skill.icon}`}
+                      alt={skill.name}
+                      width={20}
+                      height={20}
+                      className="w-5 h-5"
+                    />
+                    <span className="text-sm font-medium text-gray-700">{skill.name}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
 
             {/* Tools */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <h3 className="text-2xl font-bold mb-8 text-center">{contentData[locale].skills.tools.title}</h3>
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="text-xl font-bold text-black mb-6 text-center"
+              >
+                Tools
+              </motion.h3>
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                className="flex flex-wrap gap-4 justify-center"
               >
-                {tools.map((tool, index) => {
-                  const toolName = typeof tool === 'string' ? tool : tool.name
-                  const toolLogo = typeof tool === 'string' ? null : tool.logo
-                  
-                  // 디버깅: 콘솔에 툴 정보 출력
-                  console.log('Tool:', { tool, toolName, toolLogo, type: typeof tool })
-                  
-                  return (
-                    <motion.div
-                      key={toolName}
-                      variants={itemVariants}
-                      transition={{ delay: index * 0.1 + 0.5 }}
-                      whileHover={{ scale: 1.05, y: -5 }}
-                      className="bg-white border border-gray-200 p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300 cursor-default group"
-                    >
-                      {toolLogo ? (
-                        <div className="mb-3 flex justify-center">
-                          <Image 
-                            src={toolLogo} 
-                            alt={toolName}
-                            width={40}
-                            height={40}
-                            className="object-contain group-hover:scale-110 transition-transform duration-300"
-                          />
-                        </div>
-                      ) : (
-                        <div className="mb-3 flex justify-center">
-                          <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-xs font-bold text-gray-600">
-                            {toolName.charAt(0)}
-                          </div>
-                        </div>
-                      )}
-                      <span className="text-gray-800 font-semibold text-sm">{toolName}</span>
-                    </motion.div>
-                  )
-                })}
+                {tools.map((tool, index) => (
+                  <motion.div
+                    key={tool.name}
+                    variants={itemVariants}
+                    transition={{ delay: index * 0.05 + 0.2 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full border border-gray-200 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300"
+                  >
+                    <Image
+                      src={`/images/skills/${tool.icon}`}
+                      alt={tool.name}
+                      width={20}
+                      height={20}
+                      className="w-5 h-5"
+                    />
+                    <span className="text-sm font-medium text-gray-700">{tool.name}</span>
+                  </motion.div>
+                ))}
               </motion.div>
-            </motion.div>
+            </div>
           </div>
-
-          {/* 추가 정보 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-16 text-center"
-          >
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              새로운 기술에 대한 호기심이 많고, 지속적인 학습을 통해 
-              더 나은 사용자 경험을 제공하는 웹 서비스를 만들기 위해 노력하고 있습니다.
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>

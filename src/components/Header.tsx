@@ -2,14 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { type Locale, navigationData } from '@/lib/i18n'
-import LanguageSwitcher from './LanguageSwitcher'
 
-interface HeaderProps {
-  locale: Locale
-}
-
-const Header = ({ locale }: HeaderProps) => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -28,26 +22,78 @@ const Header = ({ locale }: HeaderProps) => {
     }
   }
 
-  const navData = navigationData[locale]
   const navItems = [
-    { name: navData.home, id: 'home' },
+    { name: '홈', id: 'home' },
     { 
-      name: navData.about, 
+      name: '소개', 
       id: 'about',
-      megaMenu: navData.megaMenu.about
+      megaMenu: {
+        sections: [
+          {
+            title: '개발자 소개',
+            items: [
+              { name: '자기소개', id: 'about', description: '개발자로서의 가치관과 목표' },
+              { name: '기술 철학', id: 'about', description: '코드에 대한 생각과 접근 방식' }
+            ]
+          },
+          {
+            title: '전문 분야',
+            items: [
+              { name: 'Frontend', id: 'skills', description: 'React, Next.js, TypeScript' },
+              { name: 'UI/UX', id: 'skills', description: '사용자 중심의 인터페이스 설계' }
+            ]
+          }
+        ]
+      }
     },
     { 
-      name: navData.skills, 
+      name: '기술', 
       id: 'skills',
-      megaMenu: navData.megaMenu.skills
+      megaMenu: {
+        sections: [
+          {
+            title: 'Frontend',
+            items: [
+              { name: 'React & Next.js', id: 'skills', description: '모던 React 생태계' },
+              { name: 'TypeScript', id: 'skills', description: '타입 안전한 개발' },
+              { name: 'Styling', id: 'skills', description: 'Tailwind, Styled Components' }
+            ]
+          },
+          {
+            title: 'Tools & Others',
+            items: [
+              { name: 'Development', id: 'skills', description: 'Git, VS Code, Figma' },
+              { name: 'Design', id: 'skills', description: 'Adobe Creative Suite' }
+            ]
+          }
+        ]
+      }
     },
-    { name: navData.career, id: 'career' },
+    { name: '경력', id: 'career' },
     { 
-      name: navData.projects, 
+      name: '프로젝트', 
       id: 'projects',
-      megaMenu: navData.megaMenu.projects
+      megaMenu: {
+        sections: [
+          {
+            title: '프로젝트 유형',
+            items: [
+              { name: '모든 프로젝트', id: 'projects', description: '모든 프로젝트 보기' },
+              { name: '팀 프로젝트', id: 'projects-team', description: '팀 협업 프로젝트' },
+              { name: '개인 프로젝트', id: 'projects-personal', description: '개인 프로젝트' }
+            ]
+          },
+          {
+            title: '기술별 분류',
+            items: [
+              { name: '웹 애플리케이션', id: 'projects-web', description: '웹 애플리케이션' },
+              { name: '모바일 앱', id: 'projects-mobile', description: '모바일 애플리케이션' }
+            ]
+          }
+        ]
+      }
     },
-    { name: navData.education, id: 'education' },
+    { name: '교육', id: 'education' },
   ]
 
   return (
@@ -66,10 +112,12 @@ const Header = ({ locale }: HeaderProps) => {
           {/* 로고 */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold cursor-pointer"
+            className={`text-xl font-bold cursor-pointer transition-colors ${
+              isScrolled ? 'text-black' : 'text-white drop-shadow-lg'
+            }`}
             onClick={() => scrollToSection('home')}
           >
-            Portfolio
+            DEVHOON
           </motion.div>
 
           {/* 네비게이션 메뉴 */}
@@ -80,7 +128,11 @@ const Header = ({ locale }: HeaderProps) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-sm font-semibold hover:text-gray-700 transition-colors flex items-center gap-1"
+                  className={`text-sm font-semibold transition-colors flex items-center gap-1 ${
+                    isScrolled 
+                      ? 'text-black hover:text-gray-700' 
+                      : 'text-white hover:text-gray-200 drop-shadow-lg'
+                  }`}
                 >
                   {item.name}
                   {item.megaMenu && (
@@ -131,9 +183,7 @@ const Header = ({ locale }: HeaderProps) => {
             ))}
             
             {/* 언어 전환 버튼 */}
-            <div className="ml-6 pl-6 border-l border-gray-300">
-              <LanguageSwitcher currentLocale={locale} />
-            </div>
+
           </div>
 
           {/* 모바일 메뉴 버튼 */}

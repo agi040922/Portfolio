@@ -1,10 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Mail, ExternalLink } from 'lucide-react'
-
-interface FooterProps {
-}
+import { useInView } from 'framer-motion'
+import { Github, MessageCircle } from 'lucide-react'
+import { useRef } from 'react'
 
 const Footer = () => {
   return (

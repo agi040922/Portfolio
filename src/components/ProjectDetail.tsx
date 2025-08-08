@@ -1,10 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { X, ExternalLink, Github, Calendar, Users, Code, Lightbulb, Globe, BookOpen, Award, Target, Image as ImageIcon, Info, Clock, TrendingUp, AlertTriangle } from 'lucide-react'
+import Image from 'next/image'
 
 interface ProjectDetailProps {
   project: {
@@ -97,10 +98,11 @@ const ProjectDetail = ({ project, isOpen, onClose }: ProjectDetailProps) => {
           {/* 메인 이미지 헤더 */}
           <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
             {project.image ? (
-              <img 
+              <Image 
                 src={project.image} 
                 alt={project.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             ) : (
               <div className="flex items-center justify-center h-full">
@@ -403,9 +405,11 @@ const ProjectDetail = ({ project, isOpen, onClose }: ProjectDetailProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {details.gallery.map((image, index) => (
                       <div key={index} className="relative group">
-                        <img
+                        <Image
                           src={image}
                           alt={`${project.title} 스크린샷 ${index + 1}`}
+                          width={400}
+                          height={192}
                           className="w-full h-48 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg"></div>

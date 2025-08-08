@@ -4,11 +4,10 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ExternalLink, Github } from 'lucide-react'
-import ProjectDetail from './ProjectDetail'
+
 import Image from 'next/image'
 
-interface ProjectsSectionProps {
-}
+
 
 // 프로젝트 데이터 타입 정의
 interface Project {

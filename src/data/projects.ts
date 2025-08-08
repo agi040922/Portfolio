@@ -22,7 +22,7 @@ export const projects: Project[] = [
     ],
     challenges: "기존 레거시 시스템과의 데이터 마이그레이션이 주요 과제였습니다. 비개발자 사용자 중심의 설계를 통해 접근성과 편의성을 크게 향상시켰습니다.",
     results: "웹사이트 디자인 개선 및 운영 효율성 향상",
-    detailImages: ["/images/project1-detail1.jpg", "/images/project1-detail2.jpg"]
+    detailImages: ["/images/projects/detail/어드민1.png", "/images/projects/detail/공지사항1.png","/images/projects/detail/공지사항,뉴스레터1.png"]
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     ],
     challenges: "구글, 네이버 등 검색 엔진 최적화가 주요 과제였습니다. 지속적인 학습과 피드백을 통해 시스템의 성능을 개선했습니다.",
     results: "콘텐츠 관리 시간 70% 단축, 검색 엔진 노출 순위 대폭 개선, 구글 및 네이버 검색 순위 1위 유지",
-    detailImages: ["/images/project2-detail1.jpg", "/images/project2-detail2.jpg"]
+    detailImages: ["/images/projects/detail/SEO2.png", "/images/projects/detail/URL2.png"]
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     ],
     challenges: "단순한 기도 공유에서 시작하여 AI 추천 시스템까지 확장하는 과정에서 사용자 경험과 기술적 복잡성의 균형을 맞추는 것이 주요 과제였습니다.",
     results: "선교회 및 지인들의 실질적 사용, 사용자 만족도 90% 이상, 주간 활성 사용자 100명",
-    detailImages: ["/images/project3-detail1.jpg", "/images/project3-detail2.jpg"]
+    detailImages: ["/images/projects/detail/프레이니3.png"]
   },
   {
     id: 4,
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     ],
     challenges: "전국 각 대학의 서로 다른 토론 방식을 하나의 시스템으로 통합하는 것이 가장 큰 도전이었습니다. 공통점 등을 찾아서 하나의 프로그램으로 만드는 것이 주요 과제였습니다.",
     results: "전국 대학 토론 동아리에서 활용, 토론 진행 효율성 극적 향상 후기, 모교 사용자 만족도 95% 달성",
-    detailImages: ["/images/project4-detail1.jpg", "/images/project4-detail2.jpg"]
+    detailImages: ["/images/projects/detail/토론4.png", "/images/projects/detail/토론중4.png", "/images/projects/detail/다양한 설정4.png"]
   },
   {
     id: 5,
@@ -112,7 +112,7 @@ export const projects: Project[] = [
     ],
     challenges: "결제 보안과 QR 코드 위조 방지, 대용량 동시 접속 처리가 주요 과제였습니다. 안전하고 확장 가능한 시스템 아키텍처를 구축했습니다.",
     results: "안정적인 결제 시스템과 편리한 어드민 페이지로 운영 효율성 향상",
-    detailImages: ["/images/project5-detail1.jpg", "/images/project5-detail2.jpg"]
+    detailImages: ["/images/projects/detail/티켓5.png"]
   },
   {
     id: 6,
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     ],
     challenges: "클라이언트의 다양한 요구사항을 만족시키면서도 일관성 있는 디자인 시스템을 구축하는 것이 주요 과제였습니다. 사용자 피드백을 반영한 반복적 개선을 통해 완성도를 높였습니다.",
     results: "클라이언트 만족도 100%, 웹사이트 로딩 속도 40% 개선, 모바일 사용성 크게 향상",
-    detailImages: ["/images/project6-detail1.jpg", "/images/project6-detail2.jpg"]
+    detailImages: []
   },
   {
     id: 7,
@@ -158,7 +158,7 @@ export const projects: Project[] = [
     ],
     challenges: "입시 정보의 정확성과 실시간 업데이트, AI 모델의 할루시네이션 방지가 주요 과제였습니다. RAG 시스템 최적화를 통해 신뢰할 수 있는 정보 제공을 구현했습니다.",
     results: "교내 경진대회 수상, 실제 입학처 홈페이지 도입",
-    detailImages: ["/images/project7-detail1.jpg", "/images/project7-detail2.jpg"]
+    detailImages: ["/images/projects/detail/세부사항7.png"]
   },
   {
     id: 8,
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     ],
     challenges: "다양한 사용자 권한 관리와 실시간 예약 충돌 방지, 모바일 최적화가 주요 과제입니다. 사용자 친화적인 인터페이스와 안정적인 시스템 구축에 집중하고 있습니다.",
     results: "현재 개발 진행 중 - 프로토타입 완성, 베타 테스트 준비 단계",
-    detailImages: ["/images/project8-detail1.jpg", "/images/project8-detail2.jpg"]
+    detailImages: ["/images/projects/detail/메인화면8.png", "/images/projects/detail/로그인8.png"]
   },
   {
     id: 9,
@@ -204,7 +204,7 @@ export const projects: Project[] = [
     ],
     challenges: "개발자의 개성과 전문성을 동시에 보여주면서도 사용자 경험을 해치지 않는 균형점을 찾는 것이 주요 과제였습니다. 다양한 프로젝트를 효과적으로 정리하고 시각화하는 데 집중했습니다.",
     results: "현재 개발 진행 중",
-    detailImages: ["/images/project9-detail1.jpg", "/images/project9-detail2.jpg"]
+    detailImages: ["/images/projects/detail/프로젝트9.png"]
   },
   {
     id: 10,
@@ -227,6 +227,6 @@ export const projects: Project[] = [
     ],
     challenges: "복잡한 근로기준법 요구사항을 시스템에 정확히 반영하고, 소규모 사업장의 다양한 운영 방식을 수용하는 유연한 시스템 구축이 주요 과제입니다.",
     results: "현재 개발 진행 중 - 프로토타입 완성, 법적 검토 및 베타 테스트 준비 단계",
-    detailImages: ["/images/project10-detail1.jpg", "/images/project10-detail2.jpg"]
+    detailImages: []
   }
 ]

@@ -74,8 +74,12 @@ const AboutSection = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative"
             >
-              <div className="w-80 h-80 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
-                <div className="text-6xl">👩‍💻</div>
+              <div className="w-80 h-80 mx-auto rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="/devhoon.webp" 
+                  alt="DEVHOON 프로필" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
 
@@ -140,7 +144,7 @@ const AboutSection = () => {
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  href="mailto:devhoon.team@gmail.com"
+                  href="mailto:jkh040922@gmail.com"
                   className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-sm hover:bg-gray-800 transition-colors"
                 >
                   📧 이메일 문의
@@ -148,7 +152,7 @@ const AboutSection = () => {
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  href="https://github.com/devhoon"
+                  href="https://github.com/agi040922"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 border border-black text-black px-6 py-3 rounded-full text-sm hover:bg-black hover:text-white transition-colors"

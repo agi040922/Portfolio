@@ -85,7 +85,7 @@ const ProjectsSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -378,7 +378,23 @@ const ProjectsSection = () => {
                     </div>
                   )}
 
-                  {/* 이미지가 없는 경우 플레이스홀더 */}
+                  {/* 상세 이미지가 없는 경우 보안 안내 */}
+                  {(!selectedProject.detailImages || selectedProject.detailImages.length === 0) && selectedProject.image && (
+                    <div className="bg-gray-50 border border-gray-200 p-6 text-center">
+                      <div className="w-12 h-12 bg-gray-300 mx-auto mb-3 flex items-center justify-center rounded-full">
+                        <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 text-sm font-medium mb-1">상세 이미지 비공개</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">
+                        보안상의 이유로 프로젝트의<br />
+                        상세 화면을 직접 공개하기 어려운 점 양해 부탁드립니다.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* 이미지가 전혀 없는 경우 플레이스홀더 */}
                   {!selectedProject.image && (!selectedProject.detailImages || selectedProject.detailImages.length === 0) && (
                     <div className="aspect-video bg-gray-100 border border-gray-200 flex items-center justify-center">
                       <div className="text-center">

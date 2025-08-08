@@ -43,7 +43,7 @@ const Footer = () => {
             <motion.a
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              href="https://github.com"
+              href="https://github.com/agi040922"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors"
@@ -52,16 +52,19 @@ const Footer = () => {
               GitHub
             </motion.a>
             
-            <motion.a
+            <motion.div
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              href="https://velog.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors cursor-pointer relative group"
             >
-              📝 Velog
-            </motion.a>
+              <MessageCircle className="w-5 h-5" />
+              문의하기
+              {/* 호버 시 나타나는 개인정보 */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white p-3 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-gray-600 text-sm">
+                <p className="mb-1">jkh040922@gmail.com</p>
+                <p>010-5953-5318</p>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* 저작권 및 기술 스택 */}

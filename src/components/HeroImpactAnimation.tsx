@@ -100,7 +100,7 @@ const HeroImpactAnimation = () => {
             DEVHOON 풀스택 개발 팀
           </p>
           
-          {/* GitHub & Velog 링크 */}
+          {/* GitHub, Velog, 문의하기 링크 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -115,20 +115,20 @@ const HeroImpactAnimation = () => {
             >
               <span className="relative">
                 GitHub
-                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-100 group-hover:scale-x-0 transition-transform duration-300 origin-left"></span>
               </span>
             </a>
-            <a
-              href="https://velog.io/@devhoon"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 hover:text-black transition-colors relative group"
-            >
+            <div className="text-gray-700 hover:text-black transition-colors relative group cursor-pointer">
               <span className="relative">
-                Velog
-                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                문의하기
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black transform scale-x-100 group-hover:scale-x-0 transition-transform duration-300 origin-left"></span>
+                {/* 호버 시 나타나는 개인정보 */}
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white text-black p-3 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border text-sm">
+                  <p className="mb-1">jkh040922@gmail.com</p>
+                  <p>010-5953-5318</p>
+                </div>
               </span>
-            </a>
+            </div>
           </motion.div>
         </motion.div>
 

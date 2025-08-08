@@ -4,24 +4,9 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ExternalLink, Github } from 'lucide-react'
-
 import Image from 'next/image'
-
-
-
-// 프로젝트 데이터 타입 정의
-interface Project {
-  id: number
-  title: string
-  description: string
-  category: string
-  type: string
-  tags: string[]
-  image?: string
-  demoUrl?: string
-  githubUrl?: string | null
-  status: string
-}
+import { Project } from '@/types/project'
+import { projects } from '@/data/projects'
 
 const ProjectsSection = () => {
   const ref = useRef(null)
@@ -30,92 +15,7 @@ const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "FAIR 인사노무컨설팅 웹사이트 재구축 및 AI 기반 콘텐츠 관리 시스템",
-      description: "오래된 기존 웹사이트를 전면 재구축하며 기업의 전문성을 강조하는 홈페이지를 제작했습니다. Rich Text Editor와 AI 기반 SEO 메타데이터 자동 생성 시스템을 개발하여 운영 효율성과 온라인 가시성을 크게 향상시켰습니다.",
-      category: "Team",
-      type: "웹사이트",
-      tags: ["Next.js", "TypeScript", "AI", "SEO", "Rich Text Editor"],
-      image: "/images/project1.jpg",
-      demoUrl: "https://fair-consulting.co.kr",
-      githubUrl: null,
-      status: "완료"
-    },
-    {
-      id: 2,
-      title: "PrayNie.com - AI 추천 기능 스마트 기도 관리 시스템",
-      description: "선교회의 제안으로 시작된 기도 관리 시스템으로, AI를 접목하여 사용자 맞춤형 기도 제목 추천과 관련 성구 연결 기능을 제공합니다. SNS형 소통 기능과 개인 기도 관리 기능을 통합한 종합 플랫폼입니다.",
-      category: "Team",
-      type: "웹앱",
-      tags: ["React", "AI", "Firebase", "SNS"],
-      image: "/images/project2.jpg",
-      demoUrl: "https://prayni.com",
-      githubUrl: "https://github.com/example/prayni",
-      status: "완료"
-    },
-    {
-      id: 3,
-      title: "DebateTimer.org - 차세대 토론 플랫폼",
-      description: "한국대학생토론연합회와 협력하여 전국 대학 토론 동아리를 위한 통합 타이머 시스템을 개발했습니다. 다양한 대학별 토론 방식을 하나의 시스템에서 맞춤형으로 관리하며, 다중 기기 화면 송출 기능을 제공합니다.",
-      category: "Team",
-      type: "웹앱",
-      tags: ["Vue.js", "WebSocket", "Node.js", "Multi-device"],
-      image: "/images/project3.jpg",
-      demoUrl: "https://debatetimer.org",
-      githubUrl: "https://github.com/example/debate-timer",
-      status: "완료"
-    },
-    {
-      id: 4,
-      title: "QR 인증 시스템 & PG 연동 티켓 구매 플랫폼",
-      description: "A회사의 티켓 구매 시스템에 QR 인증 기능과 결제 시스템(PG)을 연동하는 통합 솔루션을 개발했습니다. 구매부터 현장 인증까지 전 과정을 자동화하여 운영 효율성과 사용자 편의성을 동시에 향상시켰습니다.",
-      category: "Team",
-      type: "결제 시스템",
-      tags: ["PG연동", "QR코드", "React", "Node.js", "Admin Panel"],
-      image: "/images/project4.jpg",
-      demoUrl: "#",
-      githubUrl: null,
-      status: "완료"
-    },
-    {
-      id: 5,
-      title: "B회사 웹사이트 UI/UX 디자인 및 프론트엔드 개발",
-      description: "B회사의 새로운 웹사이트 구축 프로젝트에서 UI/UX 디자인과 프론트엔드 개발을 담당했습니다. Figma를 활용해 15페이지 분량의 웹사이트 디자인 시안을 제작하고, 반응형 웹 디자인으로 구현했습니다.",
-      category: "Single",
-      type: "웹사이트",
-      tags: ["Figma", "UI/UX", "HTML", "CSS", "JavaScript", "반응형"],
-      image: "/images/project5.jpg",
-      demoUrl: "#",
-      githubUrl: null,
-      status: "완료"
-    },
-    {
-      id: 6,
-      title: "RAG 기반 명지대학교 입시 Q&A 챗봇",
-      description: "교내 경진대회 수상작으로, 현재 모교 입학처 홈페이지에서 실사용 중인 입시 안내 챗봇입니다. RAG 기술을 활용하여 입시 요강을 학습시키고, 할루시네이션 최소화를 위한 다양한 최적화 기법을 적용했습니다.",
-      category: "Single",
-      type: "AI 챗봇",
-      tags: ["RAG", "AI", "Python", "LangChain", "NLP"],
-      image: "/images/project6.jpg",
-      demoUrl: "https://myongji.ac.kr",
-      githubUrl: null,
-      status: "완료"
-    },
-    {
-      id: 7,
-      title: "대학교 스터디룸 관리 시스템",
-      description: "학생지원팀과 협력하여 개발 중인 '대학교 스터디룸 관리 시스템'입니다. 관리자의 스터디룸 관리 업무를 간소화하고 학생들의 예약 및 이용 과정을 크게 단순화하는 것이 목표입니다. Flutter를 활용한 크로스플랫폼 모바일 앱으로 개발하고 있습니다.",
-      category: "Team",
-      type: "모바일 앱",
-      tags: ["Flutter", "Cross-platform", "ERD", "API", "Mobile"],
-      image: "/images/project7.jpg",
-      demoUrl: "#",
-      githubUrl: null,
-      status: "개발 중"
-    }
-  ]
+
 
   const filters = ['All', 'Team', 'Single']
 
@@ -192,94 +92,86 @@ const ProjectsSection = () => {
               key={project.id}
               variants={itemVariants}
               transition={{ delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded bg-gradient-to-br from-gray-900 to-gray-800 aspect-[4/3] cursor-pointer"
-              whileHover={{ scale: 1.02 }}
+              className="group bg-white border border-gray-200 overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
               onClick={() => {
                 setSelectedProject(project)
                 setIsDetailOpen(true)
               }}
             >
-              {/* 배경 이미지 영역 */}
-              {project.image ? (
-                <div className="absolute inset-0">
+              {/* 이미지 영역 */}
+              <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                {project.image ? (
                   <Image 
                     src={project.image} 
                     alt={project.title}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-black/30" />
-                </div>
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20" />
-              )}
-              
-              {/* 컨텐츠 영역 */}
-              <div className="relative h-full p-6 flex flex-col justify-between text-white">
-                {/* 상단 태그 */}
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full border border-white/30">
-                      {project.category}
-                    </span>
-                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80 text-xs rounded-full">
-                      {project.type}
-                    </span>
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                   </div>
-                  {/* 개발 상태 배지 */}
-                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                    project.status === '완료' 
-                      ? 'bg-green-500/90 text-white' 
-                      : project.status === '개발 중'
-                      ? 'bg-blue-500/90 text-white'
-                      : project.status === '기획 중'
-                      ? 'bg-yellow-500/90 text-white'
-                      : 'bg-gray-500/90 text-white'
-                  }`}>
+                )}
+                
+                {/* 상태 배지 */}
+                <div className="absolute top-3 right-3">
+                  <span className="px-2 py-1 bg-gray-900 text-white text-xs font-medium">
                     {project.status}
                   </span>
                 </div>
                 
-                {/* 하단 컨텐츠 */}
-                <div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-white/80 text-sm mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  
-                  {/* 태그 */}
-                  {project.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-2 py-1 bg-white/10 text-white/70 text-xs rounded border border-white/20"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                {/* 호버 오버레이 - 자세히 보기 */}
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <motion.button
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="px-4 py-2 bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors flex items-center gap-2"
+                  >
+                    <span>자세히 보기</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.button>
                 </div>
               </div>
               
-              {/* 호버 오버레이 */}
-              <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <motion.button
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-100 transition-colors flex items-center gap-2 transform group-hover:scale-100 scale-95"
-                >
-                  <span>자세히 보기</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.button>
+              {/* 컨텐츠 영역 */}
+              <div className="p-4">
+                <div className="flex gap-2 mb-3">
+                  <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium">
+                    {project.category}
+                  </span>
+                  <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium">
+                    {project.type}
+                  </span>
+                </div>
+                
+                <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-700 transition-colors">
+                  {project.title}
+                </h3>
+                
+                {/* 태그 */}
+                {project.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="px-2 py-1 bg-gray-50 text-gray-600 text-xs border border-gray-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="px-2 py-1 bg-gray-50 text-gray-500 text-xs border border-gray-200">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -299,74 +191,208 @@ const ProjectsSection = () => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            {/* 헤더 */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {selectedProject.title}
                   </h3>
-                  <div className="flex gap-2 mb-4">
-                    <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
-                      {selectedProject.category}
-                    </span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
-                      {selectedProject.type}
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium">
+                        {selectedProject.category}
+                      </span>
+                      <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium">
+                        {selectedProject.type}
+                      </span>
+                      <span className="px-3 py-1 bg-gray-900 text-white text-sm font-medium">
+                        {selectedProject.status}
+                      </span>
+                    </div>
+                    {selectedProject.period && (
+                      <span className="text-gray-500 text-sm">
+                        {selectedProject.period}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <button
                   onClick={() => setIsDetailOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 hover:bg-gray-100 transition-colors ml-4"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
-              
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {selectedProject.description}
-              </p>
-              
-              {selectedProject.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.tags.map((tag: string, tagIndex: number) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+            </div>
+
+            {/* 메인 콘텐츠 */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+              {/* 좌측: 상세 정보 */}
+              <div className="space-y-6">
+                {/* 프로젝트 개요 */}
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-3">
+                    프로젝트 개요
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed">
+                    {selectedProject.description}
+                  </p>
                 </div>
-              )}
-              
-              <div className="flex gap-4">
-                {selectedProject.demoUrl && selectedProject.demoUrl !== "#" && (
-                  <a
-                    href={selectedProject.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    라이브 데모
-                  </a>
+
+                {/* 주요 기능 */}
+                {selectedProject.features && selectedProject.features.length > 0 && (
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3">
+                      주요 기능
+                    </h4>
+                    <ul className="space-y-2">
+                      {selectedProject.features.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
+                          <span className="text-gray-700 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
-                {selectedProject.githubUrl && selectedProject.githubUrl !== "#" && (
-                  <a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 border-2 border-black text-black px-6 py-3 rounded-lg font-semibold hover:bg-black hover:text-white transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    Github
-                  </a>
+
+                {/* 기술 스택 */}
+                {selectedProject.tags.length > 0 && (
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3">
+                      기술 스택
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.tags.map((tag: string, tagIndex: number) => (
+                        <span
+                          key={tagIndex}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium border border-gray-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 )}
+
+                {/* 도전 과제 */}
+                {selectedProject.challenges && (
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3">
+                      도전 과제
+                    </h4>
+                    <div className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        {selectedProject.challenges}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* 성과 및 결과 */}
+                {selectedProject.results && (
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3">
+                      성과 및 결과
+                    </h4>
+                    <div className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        {selectedProject.results}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* 액션 버튼 */}
+                <div className="flex gap-3 pt-4">
+                  {selectedProject.demoUrl && selectedProject.demoUrl !== "#" && (
+                    <a
+                      href={selectedProject.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-gray-900 text-white px-5 py-2 font-medium hover:bg-gray-800 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      라이브 데모
+                    </a>
+                  )}
+                  {selectedProject.githubUrl && selectedProject.githubUrl !== "#" && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 border border-gray-900 text-gray-900 px-5 py-2 font-medium hover:bg-gray-900 hover:text-white transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* 우측: 이미지 갤러리 */}
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-3">
+                    프로젝트
+                  </h4>
+                  
+                  {/* 메인 이미지 */}
+                  {selectedProject.image && (
+                    <div className="mb-4">
+                      <div className="relative aspect-video bg-gray-100 border border-gray-200">
+                        <Image 
+                          src={selectedProject.image} 
+                          alt={`${selectedProject.title} 메인 이미지`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                        />
+                      </div>
+                      <p className="text-xs text-gray-500 mt-2">메인 화면</p>
+                    </div>
+                  )}
+
+                  {/* 상세 이미지들 */}
+                  {selectedProject.detailImages && selectedProject.detailImages.length > 0 && (
+                    <div className="space-y-3">
+                      {selectedProject.detailImages.map((image, index) => (
+                        <div key={index} className="relative aspect-video bg-gray-100 border border-gray-200">
+                          <Image 
+                            src={image} 
+                            alt={`${selectedProject.title} 상세 이미지 ${index + 1}`}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* 이미지가 없는 경우 플레이스홀더 */}
+                  {!selectedProject.image && (!selectedProject.detailImages || selectedProject.detailImages.length === 0) && (
+                    <div className="aspect-video bg-gray-100 border border-gray-200 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gray-300 mx-auto mb-3 flex items-center justify-center">
+                          <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <p className="text-gray-600 text-sm font-medium">프로젝트 이미지</p>
+                        <p className="text-gray-500 text-xs">준비 중입니다</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>

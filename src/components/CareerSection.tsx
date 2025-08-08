@@ -10,39 +10,40 @@ const CareerSection = () => {
 
   const careers = [
     {
-      company: 'fair인사노무 컨설팅',
-      position: '대표 개발자 & PM',
-      period: '2024.10 - 현재',
-      description: 'DEVHOON 팀 리더로서 풀스택 웹/앱 개발 프로젝트를 총괄하며, 팀원들과 협력하여 고품질의 솔루션을 제공하고 있습니다.',
-      achievements: [
-        '크몽 평점 5점 유지하며 다수의 외주 프로젝트 성공적 완수',
-        'Next.js, TypeScript 기반 현대적 웹 애플리케이션 개발',
-        '백엔드 개발자, 디자이너와의 효율적 협업 체계 구축',
-        'SEO 최적화 및 성능 개선을 통한 사용자 경험 향상'
-      ]
-    },
-    {
-      company: 'DEVHOON 개발팀',
+      company: 'DEVHOON',
       position: '팀 리더 & 풀스택 개발자',
-      period: '2024.03 - 현재',
-      description: '풀스택 웹/앱 개발 전문팀을 운영하며, 웹 & 인공지능 솔루션, 네이버 블로그 제작, SEO 최적화 서비스를 제공합니다.',
+      period: '2024.04 - 현재',
+      description: '개발팀을 이끌며 QR 인증 시스템, UI/UX 디자인, AI 챗봇, 스터디룸 관리 시스템, 포트폴리오 웹사이트 등 다양한 프로젝트를 총괄하고 있습니다.',
       achievements: [
-        '하청 없는 직접 개발로 고품질 서비스 제공',
-        '소스코드 제공 및 비개발자용 어드민 페이지 구축',
-        'AWS, Vercel 기반 서버 및 DB 관리',
-        'Supabase, MySQL을 활용한 백엔드 시스템 구축'
+        'kmong 외주 프로젝트 진행 중',
+        'QR 인증 기반 티켓 구매 플랫폼 제작',
+        'RAG 기반 대학 입시 상담 AI 챗봇 개발 및 실제 도입',
+        '기업 웹사이트 UI/UX 디자인부터 개발까지 전 과정 담당',
+        'Flutter 기반 크로스플랫폼 모바일 앱 개발 진행 중'
       ]
     },
     {
-      company: '프리랜서',
-      position: '풀스택 웹 개발자',
-      period: '2023.01 - 2024.02',
-      description: '다양한 클라이언트의 웹 개발 프로젝트를 담당하며 React, Next.js 기반의 현대적인 웹 애플리케이션을 개발했습니다.',
+      company: 'FAIR인사노무컨설팅',
+      position: '풀스택 개발자 & 프로젝트 매니저',
+      period: '2025.01 - 현재',
+      description: '인사노무컨설팅 전문 기업에서 웹사이트 재구축, AI 기반 SEO 시스템, HR 관리 시스템 개발을 담당하며 기업의 디지털 전환을 이끌고 있습니다.',
       achievements: [
-        'React, Next.js 기반 반응형 웹사이트 다수 개발',
-        'TypeScript 도입으로 코드 품질 및 유지보수성 향상',
-        'Tailwind CSS를 활용한 모던 UI/UX 구현',
-        '클라이언트 만족도 95% 이상 달성'
+        '기업 웹사이트 전면 재구축',
+        'AI 기반 SEO 콘텐츠 관리 시스템',
+        '카페/편의점 전용 HR 통합 관리 시스템 개발 진행 중',
+        'Next.js, TypeScript 기반 현대적 웹 애플리케이션 구축'
+      ]
+    },
+    {
+      company: '대표 개발자',
+      position: '대표 개발자 정경훈',
+      period: '2023.11 - 현재',
+      description: '개인적으로 기획하고 개발한 프로젝트들로, AI 기반 기도 관리 플랫폼과 대학 토론 통합 플랫폼을 성공적으로 구현했습니다.',
+      achievements: [
+        'AI 기반 스마트 기도 관리 플랫폼',
+        '차세대 대학 토론 통합 플랫폼으로 전국 대학 토론 동아리에서 활용',
+        'React, Supabase 기반 실시간 동기화 시스템 구현',
+        '사용자 만족도 90% 이상의 높은 평가 획득'
       ]
     }
   ]
@@ -59,7 +60,7 @@ const CareerSection = () => {
           {/* 섹션 타이틀 */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-              팀 리더 경력
+              팀 및 리더 경력
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               경험과 성장 과정

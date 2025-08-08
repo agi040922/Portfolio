@@ -74,12 +74,12 @@ const CareerSection = () => {
           </div>
 
           {/* 경력 타임라인 */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto overflow-hidden">
             {careers.map((career, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.2 }}
                 className="relative mb-12 last:mb-0"
               >

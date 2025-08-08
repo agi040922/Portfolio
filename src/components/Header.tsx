@@ -38,11 +38,12 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/90 backdrop-blur-md shadow-sm'
           : 'bg-transparent'
       }`}
+      style={{ width: '100vw' }}
     >
       <nav className="section-padding container-max">
         <div className="flex items-center justify-between h-16">
@@ -121,7 +122,8 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200"
+            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 w-full"
+            style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}
           >
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
